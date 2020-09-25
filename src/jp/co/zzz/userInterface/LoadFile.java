@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class LoadFile {
     // ファイルパスの入力受付
-    ArrayList<String> lines = new ArrayList<>();
-    int counter;
+    private ArrayList<String> lines = new ArrayList<>();
+    private int counter;
 
     // [コンストラクタ] 操作するテキストをメンバ変数へ渡す
     public LoadFile(){
