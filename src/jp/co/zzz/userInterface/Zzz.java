@@ -1,10 +1,17 @@
 package jp.co.zzz.userInterface;
 
-import java.util.ArrayList;
+import jp.co.zzz.userInterface.util.Highlight;
+import jp.co.zzz.userInterface.util.LineGet;
 
 public class Zzz {
     public static void main(String[] args){
+        // 複数ファイルに対応するためインスタンス生成
         LoadFile contents = new LoadFile();
-        System.out.println(contents.getContents());
+
+        // 指定したファイルの内容を渡す
+        Highlight highlight = new Highlight(contents.loadNewFile());
+
+        // ハイライト対象文字列の取得、ハイライト処理
+        highlight.highlightView(LineGet.getLine("ハイライトする文字列："));
     }
 }
