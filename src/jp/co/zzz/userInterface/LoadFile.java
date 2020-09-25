@@ -2,6 +2,7 @@ package jp.co.zzz.userInterface;
 
 import jp.co.zzz.userInterface.util.CharCount;
 import jp.co.zzz.userInterface.util.LineGet;
+import jp.co.zzz.userInterface.util.WordCount;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,20 +15,26 @@ import java.util.ArrayList;
 public class LoadFile {
     // ファイルパスの入力受付
     private ArrayList<String> lines = new ArrayList<>();
-    private int counter;
+    private int charCounter;
+    private int wordCounter;
 
     // [コンストラクタ] 操作するテキストをメンバ変数へ渡す
     public LoadFile(){
         lines = loadNewFile();
-        counter = CharCount.countChar(lines);
+        charCounter = CharCount.countChar(lines);
+        wordCounter = WordCount.countWord(lines);
     }
 
     public ArrayList getLines(){
         return lines;
     }
 
-    public int getCounter(){
-        return counter;
+    public int getCharCounter(){
+        return charCounter;
+    }
+
+    public int getWordCounter(){
+        return wordCounter;
     }
 
     private String getPath(){
