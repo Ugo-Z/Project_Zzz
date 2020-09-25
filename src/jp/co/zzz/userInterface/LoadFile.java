@@ -1,30 +1,33 @@
 package jp.co.zzz.userInterface;
 
-import java.io.File;
+import jp.co.zzz.userInterface.util.LineGet;
+
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class LoadFile {
-    public static String getPath(){
-        System.out.print("ファイルパスを入力してください：");
-        Scanner scanner = new Scanner(System.in);
-        String filePath = scanner.next();
-        System.out.println(filePath);
-        return filePath;
+    // ファイルパスの入力受付
+    private String getPath(){
+        return LineGet.getLine("ファイルパスを入力してください：");
     }
-    public static void loadNewFile(String filePath){
-        Path path = Paths.get(filePath);
-        try (InputStream contents = Files.newInputStream(path)){
-            for (int ch; (ch = contents.read()) != -1; ){
-                System.out.print((char) ch);
+
+    // ファイルの内容をArrayListに変換
+    public ArrayList loadNewFile(){
+        ArrayList<String> lines = new ArrayList<>();
+        Path path = Paths.get(getPath());
+        try (BufferedReader contents = Files.newBufferedReader(path, StandardCharsets.UTF_8)){
+            for (String ln; (ln = contents.readLine()) != null; ){
+                lines.add(ln);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return lines;
     }
 }
