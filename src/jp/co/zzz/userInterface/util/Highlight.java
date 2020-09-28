@@ -3,7 +3,7 @@ package jp.co.zzz.userInterface.util;
 import java.util.ArrayList;
 
 public class Highlight{
-    // 操作するテキストの内容（1行毎に配列）￥
+    // 操作するテキストの内容（1行毎に配列）
     private ArrayList<String> lines = new ArrayList<>();
 
     // [コンストラクタ] 操作するテキストをメンバ変数へ渡す
