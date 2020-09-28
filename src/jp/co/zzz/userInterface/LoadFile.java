@@ -19,8 +19,8 @@ public class LoadFile {
     private int wordCounter;
 
     // [コンストラクタ] 操作するテキストをメンバ変数へ渡す
-    public LoadFile(){
-        lines = loadNewFile();
+    public LoadFile(String Path){
+        lines = loadNewFile(Path);
         charCounter = CharCount.countChar(lines);
         wordCounter = WordCount.countWord(lines);
     }
@@ -41,17 +41,19 @@ public class LoadFile {
         return LineGet.getLine("ファイルパスを入力してください：");
     }
 
+
     // ファイルの内容をArrayListに変換
-    public ArrayList loadNewFile(){
+    public ArrayList loadNewFile(String Path){
         ArrayList<String> lines = new ArrayList<>();
-        Path path = Paths.get(getPath());
+        Path path = Paths.get(Path);
         try (BufferedReader contents = Files.newBufferedReader(path, StandardCharsets.UTF_8)){
             for (String ln; (ln = contents.readLine()) != null; ){
                 lines.add(ln);
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ファイルが見つかりません。");
+            //e.printStackTrace();
         }
         return lines;
     }
