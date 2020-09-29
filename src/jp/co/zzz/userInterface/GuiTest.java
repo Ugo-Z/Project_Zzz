@@ -31,13 +31,9 @@ public class GuiTest extends JFrame implements ActionListener {
 
         getContentPane().add(panel, BorderLayout.WEST);
 
-    }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
         LoadFile contents = new LoadFile("./test.c");
-        JLabel labels = new JLabel();
+        //JLabel labels = new JLabel();
         ArrayList<String> lines = TabCheck.checkTab(contents.getLines());
         int linesMax = 0;
         for(String line : lines) {
@@ -46,6 +42,34 @@ public class GuiTest extends JFrame implements ActionListener {
             }
         }
         //JTextArea textArea = new JTextArea(linesMax, lines.size());
+        String check = new String("<html>");
+        for(String line : lines) {
+            /*JLabel label = new JLabel(line);
+            textArea.add(label);
+            System.out.println(textArea);*/
+            check += line + "<br>";
+        }
+        check += "</html>";
+        JEditorPane textArea = new JEditorPane("text/html", check);
+        //JTextArea textArea = new JTextArea(check, lines.size(), linesMax);
+        textArea.setEditable(false);
+        panel.add(textArea);
+
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        LoadFile contents = new LoadFile("./test.c");
+        //JLabel labels = new JLabel();
+        ArrayList<String> lines = TabCheck.checkTab(contents.getLines());
+        int linesMax = 0;
+        for(String line : lines) {
+            if(linesMax <= line.length()){
+                linesMax = line.length();
+            }
+        }
+        JTextArea textArea = new JTextArea(linesMax, lines.size());
         String check = new String();
         for(String line : lines) {
             /*JLabel label = new JLabel(line);
@@ -53,7 +77,6 @@ public class GuiTest extends JFrame implements ActionListener {
             System.out.println(textArea);*/
             check += line + "\n";
         }
-        JTextArea textArea = new JTextArea(check, linesMax, lines.size());
         JPanel panel = new JPanel();
         panel.add(textArea);
     }
