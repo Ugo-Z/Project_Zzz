@@ -36,22 +36,23 @@ public class GuiTest extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //指定ファイルの読み込み
         LoadFile contents = new LoadFile("./test.c");
+        //指定ファイルのタブチェックの実行
         ArrayList<String> lines = TabCheck.checkTab(contents.getLines());
-        int linesMax = 0;
+        //表示用のHTML文字列を宣言、先頭に<html>タグの追加
+        String htmlLine = new String("<html>");
+        //タブチェックから出力されたArrayListの全行末尾に<br>を追加し、連結
         for(String line : lines) {
-            if(linesMax <= line.length()){
-                linesMax = line.length();
-            }
+            htmlLine += line + "<br>";
         }
-        String check = new String("<html>");
-        for(String line : lines) {
-            check += line + "<br>";
-        }
-        check += "</html>";
-        JEditorPane textArea = new JEditorPane("text/html", check);
-        textArea.setEditable(false);
-
-        JOptionPane.showMessageDialog(this, textArea);
+        //末尾に</HTML>タグの追加
+        htmlLine += "</html>";
+        //表示用のJEditorPaneオブジェクトのコンストラクタにhtmlLineをHTMLテキストとして渡す
+        JEditorPane pushLines = new JEditorPane("text/html", htmlLine);
+        //pushLinesの編集を無効化
+        pushLines.setEditable(false);
+        //pushLinesをウィンドウに表示
+        JOptionPane.showConfirmDialog(null, pushLines, "Result", JOptionPane.PLAIN_MESSAGE);
     }
 }

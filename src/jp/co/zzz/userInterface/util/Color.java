@@ -22,4 +22,10 @@ public class Color {
     public static final String BG_CYAN = "\u001B[46m";
     public static final String BG_WHITE = "\u001B[47m";
 
+    //HTML Background Color Parameter
+    public static final String HTML_BG_RESET = "</span>";
+    public static final String HTML_BG_RED = "<span style='background-color:red'>";
+
+
+
 }
