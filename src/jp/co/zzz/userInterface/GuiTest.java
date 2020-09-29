@@ -31,37 +31,12 @@ public class GuiTest extends JFrame implements ActionListener {
 
         getContentPane().add(panel, BorderLayout.WEST);
 
-
-        LoadFile contents = new LoadFile("./test.c");
-        //JLabel labels = new JLabel();
-        ArrayList<String> lines = TabCheck.checkTab(contents.getLines());
-        int linesMax = 0;
-        for(String line : lines) {
-            if(linesMax <= line.length()){
-                linesMax = line.length();
-            }
-        }
-        //JTextArea textArea = new JTextArea(linesMax, lines.size());
-        String check = new String("<html>");
-        for(String line : lines) {
-            /*JLabel label = new JLabel(line);
-            textArea.add(label);
-            System.out.println(textArea);*/
-            check += line + "<br>";
-        }
-        check += "</html>";
-        JEditorPane textArea = new JEditorPane("text/html", check);
-        //JTextArea textArea = new JTextArea(check, lines.size(), linesMax);
-        textArea.setEditable(false);
-        panel.add(textArea);
-
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         LoadFile contents = new LoadFile("./test.c");
-        //JLabel labels = new JLabel();
         ArrayList<String> lines = TabCheck.checkTab(contents.getLines());
         int linesMax = 0;
         for(String line : lines) {
@@ -69,15 +44,14 @@ public class GuiTest extends JFrame implements ActionListener {
                 linesMax = line.length();
             }
         }
-        JTextArea textArea = new JTextArea(linesMax, lines.size());
-        String check = new String();
+        String check = new String("<html>");
         for(String line : lines) {
-            /*JLabel label = new JLabel(line);
-            textArea.add(label);
-            System.out.println(textArea);*/
-            check += line + "\n";
+            check += line + "<br>";
         }
-        JPanel panel = new JPanel();
-        panel.add(textArea);
+        check += "</html>";
+        JEditorPane textArea = new JEditorPane("text/html", check);
+        textArea.setEditable(false);
+
+        JOptionPane.showMessageDialog(this, textArea);
     }
 }
