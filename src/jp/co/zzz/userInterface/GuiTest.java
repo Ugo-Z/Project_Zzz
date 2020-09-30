@@ -3,10 +3,15 @@ package jp.co.zzz.userInterface;
 import jp.co.zzz.userInterface.util.TabCheck;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.*;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiTest extends JFrame implements ActionListener {
@@ -41,18 +46,24 @@ public class GuiTest extends JFrame implements ActionListener {
         //指定ファイルのタブチェックの実行
         ArrayList<String> lines = TabCheck.checkTab(contents.getLines());
         //表示用のHTML文字列を宣言、先頭に<html>タグの追加
-        String htmlLine = new String("<html>");
+        StringBuilder htmlLine = new StringBuilder();
+        htmlLine.append("<html>");
         //タブチェックから出力されたArrayListの全行末尾に<br>を追加し、連結
         for(String line : lines) {
-            htmlLine += line + "<br>";
+            htmlLine.append(line + "<br>");
         }
         //末尾に</HTML>タグの追加
-        htmlLine += "</html>";
+        htmlLine.append("</html>");
         //表示用のJEditorPaneオブジェクトのコンストラクタにhtmlLineをHTMLテキストとして渡す
-        JEditorPane pushLines = new JEditorPane("text/html", htmlLine);
+        JEditorPane pushLines = new JEditorPane("text/html", htmlLine.toString());
         //pushLinesの編集を無効化
         pushLines.setEditable(false);
+
+        JScrollPane scrollPane = new JScrollPane(pushLines);
+        scrollPane.setPreferredSize(new Dimension(1200, 800));
+
         //pushLinesをウィンドウに表示
-        JOptionPane.showConfirmDialog(null, pushLines, "Result", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showConfirmDialog(null, scrollPane, "Result", JOptionPane.PLAIN_MESSAGE);
     }
+
 }
