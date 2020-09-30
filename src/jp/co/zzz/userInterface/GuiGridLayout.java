@@ -17,20 +17,20 @@ public class GuiGridLayout extends JPanel implements ActionListener{
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
 
-        JButton button = new JButton("Push");
+        JButton button = new JButton("読み込み & 解析");
         button.addActionListener(this);
-        setPreferredSize(new Dimension(1200, 800));
+        setPreferredSize(new Dimension(1024, 768));
         JTextField input = new JTextField();
         JLabel iPMessage = new JLabel("ファイルのパスを入力してください");
         JLabel iKMessage = new JLabel("ハイライトするキーワードを入力してください");
-        inputPath = new JTextField(20);
-        inputKeyWord = new JTextField(20);
+        inputPath = new JTextField(16);
+        inputKeyWord = new JTextField(16);
 
         GridBagConstraints constraints = new GridBagConstraints();//制約に使うオブジェクト
         constraints.fill = GridBagConstraints.BOTH;//【1】縦横にコンポーネットサイズを満たすように配置
         constraints.weightx = 1.0;//余分の水平スペースを分配
         constraints.weighty = 1.0;//余分の垂直スペースを分配
-        constraints.insets = new Insets(5, 0, 5, 0);//上隙間,左隙間,下隙間,右隙間
+        constraints.insets = new Insets(10, 10, 10, 10);//上隙間,左隙間,下隙間,右隙間
 
         constraints.gridx = 0;	//位置x
         constraints.gridy = 0;	//位置y
@@ -49,19 +49,19 @@ public class GuiGridLayout extends JPanel implements ActionListener{
 
         constraints.gridx = 3;	//位置x
         constraints.gridy = 1;	//位置y
-        //constraints.gridwidth = 1;	//コンポーネントの表示領域のセル数 横
+        constraints.gridwidth = 2;	//コンポーネントの表示領域のセル数 横
         layout.setConstraints(inputPath, constraints);//現在の制約を使い
         this.add(inputPath);
 
         constraints.gridx = 0;	//位置x
         constraints.gridy = 2;	//位置y
-        //constraints.gridwidth = 1;	//コンポーネントの表示領域のセル数 横
+        constraints.gridwidth = 1;	//コンポーネントの表示領域のセル数 横
         layout.setConstraints(iKMessage, constraints);//現在の制約を使い
         this.add(iKMessage);
 
         constraints.gridx = 3;	//位置x
         constraints.gridy = 2;	//位置y
-        //constraints.gridwidth = 1;	//コンポーネントの表示領域のセル数 横
+        constraints.gridwidth = 2;	//コンポーネントの表示領域のセル数 横
         layout.setConstraints(inputKeyWord, constraints);//現在の制約を使い
         this.add(inputKeyWord);
     }

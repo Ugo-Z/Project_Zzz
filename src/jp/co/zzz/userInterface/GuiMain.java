@@ -8,7 +8,7 @@ import java.awt.BorderLayout;
 class GuiMain{
     public static void main(String args[]){
         GuiFrame layout = new GuiFrame();
-        layout.setBounds(100, 150, 300, 250);
+        layout.setBounds(100, 150, 550, 250);
         layout.setVisible(true);
     }
 }

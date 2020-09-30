@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GuiFrame extends JFrame {
     public GuiFrame(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("TestGridBagLayout");
+        this.setTitle("Project_Zzz");
         JPanel panel = new GuiGridLayout();
         this.setContentPane(panel);
         this.setBounds(0, 0, 200, 150);

@@ -20,7 +20,7 @@ public class GuiTest extends JFrame implements ActionListener {
 
     GuiTest(String title){
         setTitle(title);
-        setBounds(100, 100, 600, 400);
+        setBounds(100, 100, 1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JTextField input = new JTextField();
         JLabel iPMessage = new JLabel("ファイルのパスを入力してください");
@@ -65,7 +65,7 @@ public class GuiTest extends JFrame implements ActionListener {
         pushLines.setEditable(false);
 
         JScrollPane scrollPane = new JScrollPane(pushLines);
-        scrollPane.setPreferredSize(new Dimension(1200, 800));
+        scrollPane.setPreferredSize(new Dimension(1024, 500));
 
         //pushLinesをウィンドウに表示
         JOptionPane.showConfirmDialog(null, scrollPane, "Result", JOptionPane.PLAIN_MESSAGE);
