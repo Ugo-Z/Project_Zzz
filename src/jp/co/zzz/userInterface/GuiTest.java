@@ -3,38 +3,43 @@ package jp.co.zzz.userInterface;
 import jp.co.zzz.userInterface.util.TabCheck;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.html.HTML;
-import javax.swing.text.html.HTMLDocument;
-import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.*;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiTest extends JFrame implements ActionListener {
 
+    private JTextField inputPath;
     public static void main(String args[]){
         GuiTest frame = new GuiTest("MyTitle");
         frame.setVisible(true);
     }
 
+
     GuiTest(String title){
         setTitle(title);
         setBounds(100, 100, 600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel = new JPanel();
+        JTextField input = new JTextField();
+        JLabel iPMessage = new JLabel("ファイルのパスを入力してください");
+        JLabel iKMessage = new JLabel("ハイライトするキーワードを入力してください");
+        inputPath = new JTextField(100);
 
         JButton button = new JButton("Push");
 
         button.addActionListener(this);
+        setPreferredSize(new Dimension(1200, 800));
 
-        panel.add(button);
-
-        getContentPane().add(panel, BorderLayout.WEST);
+        //getContentPane().add(htmlHead);
+        getContentPane().add(iPMessage);
+        //getContentPane().add(htmlBr);
+        getContentPane().add(inputPath);
+        //getContentPane().add(htmlBr);
+        getContentPane().add(button);
+        //getContentPane().add(htmlBr);
+        //getContentPane().add(htmlTail);
 
     }
 
@@ -42,7 +47,7 @@ public class GuiTest extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //指定ファイルの読み込み
-        LoadFile contents = new LoadFile("./test.c");
+        LoadFile contents = new LoadFile(inputPath.getText());
         //指定ファイルのタブチェックの実行
         ArrayList<String> lines = TabCheck.checkTab(contents.getLines());
         //表示用のHTML文字列を宣言、先頭に<html>タグの追加
