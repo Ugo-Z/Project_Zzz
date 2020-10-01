@@ -1,6 +1,8 @@
 package jp.co.zzz.userInterface;
+import jp.co.zzz.userInterface.util.CharCount;
 import jp.co.zzz.userInterface.util.Highlight;
 import jp.co.zzz.userInterface.util.TabCheck;
+import jp.co.zzz.userInterface.util.WordCount;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,8 +10,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GuiGridLayout extends JPanel implements ActionListener{
-    private JTextField inputPath;
-    private JTextField inputKeyWord;
+    protected JTextField inputPath;
+    protected JTextField inputKeyWord;
 
     public GuiGridLayout(){
         UIManager.put("Button.font",new Font("MMeiryo", Font.PLAIN, 12)); //Buttonのフォント設定
@@ -80,9 +82,17 @@ public class GuiGridLayout extends JPanel implements ActionListener{
         }else {
             lines = TabCheck.checkTab(contents.getLines());
         }
+
+        //単語数、文字数カウントのラベル
+        String wordCounter = Integer.toString(WordCount.countWord(lines));
+        String charCounter = Integer.toString(CharCount.countChar(lines));
+
         //表示用のHTML文字列を宣言、先頭に<html>タグの追加
         StringBuilder htmlLine = new StringBuilder();
         htmlLine.append("<html>");
+        htmlLine.append("単語数：" + wordCounter);
+        htmlLine.append("文字数：" + charCounter);
+        htmlLine.append("<br>");
         //タブチェックから出力されたArrayListの全行末尾に<br>を追加し、連結
         for(String line : lines) {
             htmlLine.append(line + "<br>");
@@ -96,7 +106,7 @@ public class GuiGridLayout extends JPanel implements ActionListener{
 
         JScrollPane scrollPane = new JScrollPane(pushLines);
         scrollPane.setPreferredSize(new Dimension(1200, 800));
-
+        
         //pushLinesをウィンドウに表示
         JOptionPane.showConfirmDialog(null, scrollPane, "Result", JOptionPane.PLAIN_MESSAGE);
     }
