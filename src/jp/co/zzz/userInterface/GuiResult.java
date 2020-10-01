@@ -1,9 +1,6 @@
 package jp.co.zzz.userInterface;
 
-import jp.co.zzz.userInterface.util.CharCount;
-import jp.co.zzz.userInterface.util.Highlight;
-import jp.co.zzz.userInterface.util.TabCheck;
-import jp.co.zzz.userInterface.util.WordCount;
+import jp.co.zzz.userInterface.util.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,16 +18,17 @@ public class GuiResult {
         LoadFile contents = new LoadFile(path);
         //指定ファイルのタブチェックの実行
         ArrayList<String> lines = new ArrayList<>();
-        if (keyWord != null){
+        TextAnalyzer textAnalyzer = new TextAnalyzer(contents.getLines(), keyWord);
+        lines = textAnalyzer.textAnalyze();
+        /*if (keyWord != null){
             Highlight highlight = new Highlight(TabCheck.checkTab(contents.getLines()));
             lines = highlight.textHighlight(keyWord);
         }else {
             lines = TabCheck.checkTab(contents.getLines());
-        }
-
+        }:*/
         //単語数、文字数カウントのラベル
-        String wordCounter = Integer.toString(WordCount.countWord(lines));
-        String charCounter = Integer.toString(CharCount.countChar(lines));
+        String wordCounter = Integer.toString(textAnalyzer.getWordCounter());
+        String charCounter = Integer.toString(textAnalyzer.getCharCounter());
 
         //表示用のHTML文字列を宣言、先頭に<html>タグの追加
         StringBuilder htmlLine = new StringBuilder();
