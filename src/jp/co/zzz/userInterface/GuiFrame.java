@@ -1,18 +1,13 @@
 package jp.co.zzz.userInterface;
 
 import javax.swing.*;
-import jp.co.zzz.userInterface.util.TabCheck;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-import java.util.ArrayList;
 public class GuiFrame extends JFrame {
     public GuiFrame(){
+        // 閉じるで終了、ソフトタイトル設定
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Project_Zzz");
+
         JPanel panel = new GuiGridLayout();
         this.setContentPane(panel);
         this.setBounds(0, 0, 200, 150);

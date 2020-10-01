@@ -5,8 +5,6 @@ import jp.co.zzz.userInterface.util.TabCheck;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GuiTest extends JFrame implements ActionListener {

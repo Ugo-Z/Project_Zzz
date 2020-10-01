@@ -5,8 +5,6 @@ import jp.co.zzz.userInterface.util.TabCheck;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GuiGridLayout extends JPanel implements ActionListener{
@@ -14,6 +12,10 @@ public class GuiGridLayout extends JPanel implements ActionListener{
     private JTextField inputKeyWord;
 
     public GuiGridLayout(){
+        UIManager.put("Button.font",new Font("MMeiryo", Font.PLAIN, 12)); //Buttonのフォント設定
+        UIManager.put("Label.font",new Font("Meiryo", Font.PLAIN, 12)); //Labelのフォント設定
+        UIManager.put("TextField.font",new Font("Meiryo", Font.PLAIN, 12)); //Listのフォント設定
+
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
 
