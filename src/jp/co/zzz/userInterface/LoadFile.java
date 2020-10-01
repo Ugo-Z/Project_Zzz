@@ -1,7 +1,6 @@
 package jp.co.zzz.userInterface;
 
 import jp.co.zzz.userInterface.util.CharCount;
-import jp.co.zzz.userInterface.util.LineGet;
 import jp.co.zzz.userInterface.util.WordCount;
 
 import java.io.BufferedReader;
@@ -37,11 +36,6 @@ public class LoadFile {
         return wordCounter;
     }
 
-    private String getPath(){
-        return LineGet.getLine("ファイルパスを入力してください：");
-    }
-
-
     // ファイルの内容をArrayListに変換
     public ArrayList loadNewFile(String Path){
         ArrayList<String> lines = new ArrayList<>();
@@ -53,7 +47,7 @@ public class LoadFile {
 
         } catch (IOException e) {
             System.out.println("ファイルが見つかりません。");
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         return lines;
     }
