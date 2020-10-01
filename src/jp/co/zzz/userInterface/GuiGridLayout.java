@@ -35,13 +35,11 @@ public class GuiGridLayout extends JPanel implements ActionListener{
         layout.setConstraints(button, constraints);//現在の制約を使い
         this.add(button);
 
-
         constraints.gridx = 0;	//位置x
         constraints.gridy = 1;	//位置y
         constraints.gridwidth = 1;	//コンポーネントの表示領域のセル数 横
         layout.setConstraints(inputPathMessage, constraints);//現在の制約を使い
         this.add(inputPathMessage);
-
 
         constraints.gridx = 3;	//位置x
         constraints.gridy = 1;	//位置y
