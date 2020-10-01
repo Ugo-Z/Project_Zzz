@@ -1,8 +1,5 @@
 package jp.co.zzz.userInterface;
 
-import jp.co.zzz.userInterface.util.CharCount;
-import jp.co.zzz.userInterface.util.WordCount;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
