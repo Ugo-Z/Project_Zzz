@@ -1,6 +1,7 @@
 package jp.co.zzz.userInterface;
 
 import jp.co.zzz.userInterface.util.*;
+import jp.co.zzz.userInterface.util.Color;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,25 @@ public class GuiResult {
     public void result(){
         //指定ファイルの読み込み
         LoadFile contents = new LoadFile(path);
+        if (contents.getLines().get(0) == "101"){
+
+            //表示用のJEditorPaneオブジェクトのコンストラクタにhtmlLineをHTMLテキストとして渡す
+            JEditorPane pushLines = new JEditorPane(
+                    "text/html",
+                    "<html>"
+                    + Color.HTML_RED
+                    + "ファイルが見つかりません</html>"
+                    + Color.HTML_RESET
+                    + "</html>"
+            );
+            //pushLinesの編集を無効化
+            pushLines.setEditable(false);
+
+            JScrollPane scrollPane = new JScrollPane(pushLines);
+            scrollPane.setPreferredSize(new Dimension(150, 80));
+            JOptionPane.showMessageDialog(null, scrollPane, "Result", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         //指定ファイルのタブチェックの実行
         ArrayList<String> lines = new ArrayList<>();
         TextAnalyzer textAnalyzer = new TextAnalyzer(contents.getLines(), keyWord);

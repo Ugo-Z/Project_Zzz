@@ -34,6 +34,8 @@ public class LoadFile {
         } catch (IOException e) {
             System.out.println("ファイルが見つかりません。");
             e.printStackTrace();
+            lines.add("101");
+            return lines;
         }
         return lines;
     }
