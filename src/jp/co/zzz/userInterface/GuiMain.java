@@ -11,7 +11,7 @@ class GuiMain{
 
         //フレーム生成
         GuiFrame layout = new GuiFrame();
-        layout.setBounds(displayWidth / 4, displayHeight / 4, displayWidth / 2, displayHeight / 2);
+        layout.setBounds(displayWidth / 4, displayHeight / 4, displayWidth / 2, displayHeight / 4);
         layout.setVisible(true);
     }
 }
