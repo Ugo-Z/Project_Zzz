@@ -1,8 +1,5 @@
 package jp.co.zzz.userInterface;
 
-import jp.co.zzz.userInterface.util.CharCount;
-import jp.co.zzz.userInterface.util.WordCount;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,28 +11,14 @@ import java.util.ArrayList;
 public class LoadFile {
     // ファイルパスの入力受付
     private ArrayList<String> lines = new ArrayList<>();
-    private int charCounter;
-    private int wordCounter;
-
     // [コンストラクタ] 操作するテキストをメンバ変数へ渡す
     public LoadFile(String Path){
         lines = loadNewFile(Path);
-        charCounter = CharCount.countChar(lines);
-        wordCounter = WordCount.countWord(lines);
     }
 
     public ArrayList getLines(){
         return lines;
     }
-
-    public int getCharCounter(){
-        return charCounter;
-    }
-
-    public int getWordCounter(){
-        return wordCounter;
-    }
-
     // ファイルの内容をArrayListに変換
     public ArrayList loadNewFile(String Path){
         ArrayList<String> lines = new ArrayList<>();
@@ -48,6 +31,8 @@ public class LoadFile {
         } catch (IOException e) {
             System.out.println("ファイルが見つかりません。");
             e.printStackTrace();
+            lines.add("101");
+            return lines;
         }
         return lines;
     }
