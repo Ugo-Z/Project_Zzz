@@ -3,6 +3,7 @@ package jp.co.zzz.userInterface;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class GuiGridLayout extends JPanel implements ActionListener{
     protected JTextField inputPath;
@@ -15,12 +16,16 @@ public class GuiGridLayout extends JPanel implements ActionListener{
 
         JButton button = new JButton("読み込み & 解析");
         button.addActionListener(this);
-        setPreferredSize(new Dimension(1024, 768));
+
+        JButton fileSelect = new JButton("ファイル選択");
+        fileSelect.addActionListener(this::pathSelect);
+
+        setPreferredSize(new Dimension(800, 600));
         JTextField input = new JTextField();
-        JLabel inputPathMessage = new JLabel("ファイルのパスを入力してください");
-        JLabel inputKeywordMessage = new JLabel("ハイライトするキーワードを入力してください");
-        inputPath = new JTextField(16);
-        inputKeyWord = new JTextField(16);
+        JLabel inputPathMessage = new JLabel("ファイルのパス");
+        JLabel inputKeywordMessage = new JLabel("ハイライトするキーワード");
+        inputPath = new JTextField(20);
+        inputKeyWord = new JTextField(20);
 
         GridBagConstraints constraints = new GridBagConstraints();//制約に使うオブジェクト
         constraints.fill = GridBagConstraints.BOTH;//【1】縦横にコンポーネットサイズを満たすように配置
@@ -30,10 +35,17 @@ public class GuiGridLayout extends JPanel implements ActionListener{
 
         constraints.gridx = 0;	//位置x
         constraints.gridy = 0;	//位置y
-        constraints.gridwidth = 3;	//コンポーネントの表示領域のセル数 横
+        constraints.gridwidth = 2;	//コンポーネントの表示領域のセル数 横
         constraints.gridheight = 1;	//コンポーネントの表示領域のセル数 縦
         layout.setConstraints(button, constraints);//現在の制約を使い
         this.add(button);
+
+        constraints.gridx = 2;	//位置x
+        constraints.gridy = 0;	//位置y
+        constraints.gridwidth = 2;	//コンポーネントの表示領域のセル数 横
+        constraints.gridheight = 1;	//コンポーネントの表示領域のセル数 縦
+        layout.setConstraints(fileSelect, constraints);//現在の制約を使い
+        this.add(fileSelect);
 
         constraints.gridx = 0;	//位置x
         constraints.gridy = 1;	//位置y
@@ -64,5 +76,17 @@ public class GuiGridLayout extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         GuiResult result = new GuiResult(inputPath.getText(), inputKeyWord.getText());
         result.result();
+    }
+
+    public void pathSelect(ActionEvent e){
+        //ファイルセレクター追加
+        JFileChooser fileSelector = new JFileChooser();
+        fileSelector.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int selected = fileSelector.showOpenDialog(this);
+        if (selected == JFileChooser.APPROVE_OPTION) {
+            File file = fileSelector.getSelectedFile();
+            inputPath.setText(file.getAbsolutePath());
+        }
     }
 }

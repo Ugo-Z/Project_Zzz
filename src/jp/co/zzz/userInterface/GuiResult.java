@@ -1,7 +1,6 @@
 package jp.co.zzz.userInterface;
 
 import jp.co.zzz.userInterface.util.*;
-import jp.co.zzz.userInterface.util.Color;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,43 +17,27 @@ public class GuiResult {
         //指定ファイルの読み込み
         LoadFile contents = new LoadFile(path);
         if (contents.getLines().get(0) == "101"){
-
-            //表示用のJEditorPaneオブジェクトのコンストラクタにhtmlLineをHTMLテキストとして渡す
-            JEditorPane pushLines = new JEditorPane(
-                    "text/html",
-                    "<html>"
-                    + Color.HTML_RED
-                    + "ファイルが見つかりません</html>"
-                    + Color.HTML_RESET
-                    + "</html>"
-            );
-            //pushLinesの編集を無効化
-            pushLines.setEditable(false);
-
-            JScrollPane scrollPane = new JScrollPane(pushLines);
-            scrollPane.setPreferredSize(new Dimension(150, 80));
-            JOptionPane.showMessageDialog(null, scrollPane, "Result", JOptionPane.ERROR_MESSAGE);
+            // ファイルぬるぽのフレーム生成、エラーダイアログ表示
+            JFrame errorFrame = new JFrame();
+            JOptionPane.showMessageDialog(errorFrame, "ファイルが見つかりません", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         //指定ファイルのタブチェックの実行
         ArrayList<String> lines = new ArrayList<>();
         TextAnalyzer textAnalyzer = new TextAnalyzer(contents.getLines(), keyWord);
         lines = textAnalyzer.textAnalyze();
-        /*if (keyWord != null){
-            Highlight highlight = new Highlight(TabCheck.checkTab(contents.getLines()));
-            lines = highlight.textHighlight(keyWord);
-        }else {
-            lines = TabCheck.checkTab(contents.getLines());
-        }:*/
+
         //単語数、文字数カウントのラベル
         String wordCounter = Integer.toString(textAnalyzer.getWordCounter());
         String charCounter = Integer.toString(textAnalyzer.getCharCounter());
 
         //表示用のHTML文字列を宣言、先頭に<html>タグの追加
         StringBuilder htmlLine = new StringBuilder();
-        htmlLine.append("<html>");
+        htmlLine.append("<html><span style='font-size:14px;'>");
         htmlLine.append("パス：" + path + "<br>");
         htmlLine.append("単語数：" + wordCounter);
+        htmlLine.append("&nbsp;");
         htmlLine.append("文字数：" + charCounter);
         htmlLine.append("<br><br>");
         //タブチェックから出力されたArrayListの全行末尾に<br>を追加し、連結
@@ -62,7 +45,7 @@ public class GuiResult {
             htmlLine.append(line + "<br>");
         }
         //末尾に</HTML>タグの追加
-        htmlLine.append("</html>");
+        htmlLine.append("</span></html>");
         //表示用のJEditorPaneオブジェクトのコンストラクタにhtmlLineをHTMLテキストとして渡す
         JEditorPane pushLines = new JEditorPane("text/html", htmlLine.toString());
         //pushLinesの編集を無効化
@@ -72,6 +55,6 @@ public class GuiResult {
         scrollPane.setPreferredSize(new Dimension(1200, 800));
 
         //pushLinesをウィンドウに表示
-        JOptionPane.showConfirmDialog(null, scrollPane, "Result", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, scrollPane, "Result", JOptionPane.PLAIN_MESSAGE);
     }
 }

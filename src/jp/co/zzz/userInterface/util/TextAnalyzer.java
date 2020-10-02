@@ -6,10 +6,11 @@ public class TextAnalyzer {
     private ArrayList<String> lines = new ArrayList<>();
     private int charCounter = 0;
     private int wordCounter = 0;
-    private  String keyWord;
+    private String keyWord;
 
     public TextAnalyzer(ArrayList<String> lines, String keyWord){
         this.lines = lines;
+        keyWord = keyWord.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;").replace(">", "&gt;").replace("'", "&#39;").replace(" ", "&nbsp;");;
         this.keyWord = keyWord;
     }
 
@@ -18,9 +19,10 @@ public class TextAnalyzer {
         for(String line : lines){
             charCounter += line.length();
             wordCounter += line.split("[,\\s]+").length;
+            line = line.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;").replace(">", "&gt;").replace("'", "&#39;").replace(" ", "&nbsp;");
             if (keyWord != null) {
                 textHighlight(line, keyWord, lineIndex);
-
+                line = lines.get(lineIndex);
             }
             checkTab(line, lineIndex);
             lineIndex++;
