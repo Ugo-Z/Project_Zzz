@@ -20,7 +20,7 @@ public class TextAnalyzer {
             charCounter += line.length();
             wordCounter += line.split("[,\\s]+").length;
             line = line.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;").replace(">", "&gt;").replace("'", "&#39;").replace(" ", "&nbsp;");
-            if (keyWord != null) {
+            if (keyWord.length() >= 1) {
                 textHighlight(line, keyWord, lineIndex);
                 line = lines.get(lineIndex);
             }
